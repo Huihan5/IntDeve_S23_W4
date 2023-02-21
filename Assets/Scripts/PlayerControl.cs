@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -23,11 +26,39 @@ public class PlayerControl : MonoBehaviour
 
     bool Jump = false;
 
+    Animator myAnim;
+
+    //New
+
     bool SecondJump = false;
 
     public float jumpTimes = 2f;
 
-    Animator myAnim;
+    public float score = 0;
+
+    bool GameWin = false;
+
+    bool GameLose = false;
+
+    bool BeforeGame = true;
+
+    bool InGame = false;
+
+    //Sound Effect
+
+    public AudioSource mySource;
+
+    public AudioClip jumpClip;
+
+    public AudioClip collectItem;
+
+    //Text
+
+    public GameObject Instruction;
+
+    public GameObject Win;
+
+    public GameObject Lose;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +76,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Jump") && Grounded)
         {
             Jump = true;
+            mySource.PlayOneShot(jumpClip);
         }
 
         //New!
@@ -56,6 +88,13 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpTimes --;
+        }
+
+        if (Input.GetButtonDown("Jump") && BeforeGame)
+        {
+            Instruction.SetActive(false);
+            InGame = true;
+            BeforeGame = false;
         }
 
         if (Grounded)
@@ -76,6 +115,22 @@ public class PlayerControl : MonoBehaviour
         {
             myAnim.SetBool("Walking", false);
         }
+
+        //Notice that the score will not be saved, try to solve it with game manager
+        if (score >= 2)
+        {
+            GameWin = true;
+        }
+
+        if (GameWin)
+        {
+            Win.SetActive(true);
+        }
+        else if (GameLose)
+        {
+            Lose.SetActive(true);
+        }
+
     }
 
     void FixedUpdate()
@@ -121,5 +176,28 @@ public class PlayerControl : MonoBehaviour
         }
 
         myBody.velocity = new Vector3(moveSpeed, myBody.velocity.y, 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D somecollision)
+    {
+        Debug.Log(somecollision.gameObject.name);
+
+        if (somecollision.gameObject.name == "obj_gate")
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if (somecollision.gameObject.name == "obj_fruit")
+        {
+            mySource.PlayOneShot(collectItem);
+            Destroy(somecollision.gameObject);
+            score++;
+        }
+
+        if (somecollision.gameObject.name == "obj_bound")
+        {
+            GameLose = true;
+        }
+
     }
 }
