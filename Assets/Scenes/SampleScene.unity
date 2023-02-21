@@ -503,9 +503,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   castDist: 1
-  gravityScale: 1
+  gravityScale: 2
   gravityFall: 5
-  jumpLimit: 5
+  jumpLimit: 8
+  jumpTimes: 2
 --- !u!50 &1103323936
 Rigidbody2D:
   serializedVersion: 4

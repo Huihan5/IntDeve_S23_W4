@@ -23,6 +23,10 @@ public class PlayerControl : MonoBehaviour
 
     bool Jump = false;
 
+    bool SecondJump = false;
+
+    public float jumpTimes = 2f;
+
     Animator myAnim;
 
     // Start is called before the first frame update
@@ -43,7 +47,28 @@ public class PlayerControl : MonoBehaviour
             Jump = true;
         }
 
-        if(horizontalMove > 0.2f || horizontalMove < -0.2f)
+        //New!
+        if (Input.GetButtonDown("Jump") && !Grounded && jumpTimes > 0)
+        {
+            SecondJump = true;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpTimes --;
+        }
+
+        if (Grounded)
+        {
+            jumpTimes = 2;
+        }
+
+        if (jumpTimes < 0)
+        {
+            jumpTimes = 0;
+        }
+
+        if (horizontalMove > 0.2f || horizontalMove < -0.2f)
         {
             myAnim.SetBool("Walking", true);
         }
@@ -62,6 +87,14 @@ public class PlayerControl : MonoBehaviour
         {
             myBody.AddForce(Vector2.up * jumpLimit, ForceMode2D.Impulse);
             Jump = false;
+        }
+
+        //New!
+        if (SecondJump)
+        {
+            myBody.AddForce(Vector2.up * jumpLimit, ForceMode2D.Impulse);
+            Jump = false;
+            SecondJump = false;
         }
 
         if(myBody.velocity.y > 0)
