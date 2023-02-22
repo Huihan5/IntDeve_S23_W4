@@ -60,11 +60,16 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject Lose;
 
+    //NewNew!
+
+    SpriteRenderer myRend;
+
     // Start is called before the first frame update
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+        myRend = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -107,9 +112,15 @@ public class PlayerControl : MonoBehaviour
             jumpTimes = 0;
         }
 
-        if (horizontalMove > 0.2f || horizontalMove < -0.2f)
+        if (horizontalMove > 0.2f)
         {
             myAnim.SetBool("Walking", true);
+            myRend.flipX = false;
+        }
+        else if (horizontalMove < -0.2f)
+        {
+            myAnim.SetBool("Walking", true);
+            myRend.flipX = true;
         }
         else
         {
