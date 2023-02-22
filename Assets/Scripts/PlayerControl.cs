@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
 
     public float gravityFall = 40f;
 
-    public float jumpLimit = 2f;
+    public float jumpLimit = 1f;
 
     bool Jump = false;
 
@@ -40,9 +40,9 @@ public class PlayerControl : MonoBehaviour
 
     bool GameLose = false;
 
-    bool BeforeGame = true;
+    bool BeforeGame = false;
 
-    bool InGame = false;
+    bool InGame = true;
 
     //Sound Effect
 
@@ -64,6 +64,8 @@ public class PlayerControl : MonoBehaviour
 
     SpriteRenderer myRend;
 
+    public float sceneNumber = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,24 +77,13 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxis("Horizontal");
-        Debug.Log(horizontalMove);
+        //horizontalMove = Input.GetAxis("Horizontal");
+        //Debug.Log(horizontalMove);
 
-        if (Input.GetButtonDown("Jump") && Grounded)
+        if (sceneNumber == 1)
         {
-            Jump = true;
-            mySource.PlayOneShot(jumpClip);
-        }
-
-        //New!
-        if (Input.GetButtonDown("Jump") && !Grounded && jumpTimes > 0)
-        {
-            SecondJump = true;
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpTimes --;
+            InGame = true;
+            BeforeGame = false;
         }
 
         if (Input.GetButtonDown("Jump") && BeforeGame)
@@ -102,9 +93,34 @@ public class PlayerControl : MonoBehaviour
             BeforeGame = false;
         }
 
+        if (InGame)
+        {
+            horizontalMove = Input.GetAxis("Horizontal");
+            Debug.Log(horizontalMove);
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpTimes--;
+
+                if (Grounded)
+                {
+                    Jump = true;
+                    mySource.PlayOneShot(jumpClip);
+                    Debug.Log("First Jump");
+                }
+
+                //New!
+                if (!Grounded && jumpTimes >= 0)
+                {
+                    Debug.Log("Second Jump");
+                    SecondJump = true;
+                }
+            }
+        }
+
         if (Grounded)
         {
-            jumpTimes = 2;
+            jumpTimes = 1;
         }
 
         if (jumpTimes < 0)
@@ -112,25 +128,13 @@ public class PlayerControl : MonoBehaviour
             jumpTimes = 0;
         }
 
-        if (horizontalMove > 0.2f)
+        if (horizontalMove > 0.2f || horizontalMove < -0.2f)
         {
             myAnim.SetBool("Walking", true);
-            myRend.flipX = false;
-        }
-        else if (horizontalMove < -0.2f)
-        {
-            myAnim.SetBool("Walking", true);
-            myRend.flipX = true;
         }
         else
         {
             myAnim.SetBool("Walking", false);
-        }
-
-        //Notice that the score will not be saved, try to solve it with game manager
-        if (score >= 2)
-        {
-            GameWin = true;
         }
 
         if (GameWin)
@@ -140,6 +144,11 @@ public class PlayerControl : MonoBehaviour
         else if (GameLose)
         {
             Lose.SetActive(true);
+        }
+
+        if (GameLose && Input.GetButtonDown("Jump") && !GameWin)
+        {
+            SceneManager.LoadScene(1);
         }
 
     }
@@ -179,7 +188,7 @@ public class PlayerControl : MonoBehaviour
         if(hit.collider != null && hit.transform.name == "obj_ground")
         {
             Grounded = true;
-            //Debug.Log("Grounded");
+            Debug.Log("Grounded");
         }
         else
         {
@@ -193,9 +202,14 @@ public class PlayerControl : MonoBehaviour
     {
         Debug.Log(somecollision.gameObject.name);
 
-        if (somecollision.gameObject.name == "obj_gate")
+        if (somecollision.gameObject.name == "obj_gate" && score >=1)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
+        }
+
+        if (somecollision.gameObject.name == "obj_final" && score >= 3)
+        {
+            GameWin = true;
         }
 
         if (somecollision.gameObject.name == "obj_fruit")
@@ -208,6 +222,7 @@ public class PlayerControl : MonoBehaviour
         if (somecollision.gameObject.name == "obj_bound")
         {
             GameLose = true;
+            //jumpTimes = 0;
         }
 
     }
