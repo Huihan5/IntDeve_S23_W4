@@ -100,6 +100,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
+                //mySource.PlayOneShot(jumpClip);
                 jumpTimes--;
 
                 if (Grounded)
@@ -113,6 +114,7 @@ public class PlayerControl : MonoBehaviour
                 if (!Grounded && jumpTimes >= 0)
                 {
                     Debug.Log("Second Jump");
+                    mySource.PlayOneShot(jumpClip);
                     SecondJump = true;
                 }
             }
@@ -128,9 +130,15 @@ public class PlayerControl : MonoBehaviour
             jumpTimes = 0;
         }
 
-        if (horizontalMove > 0.2f || horizontalMove < -0.2f)
+        if (horizontalMove > 0.2f)
         {
             myAnim.SetBool("Walking", true);
+            myRend.flipX = false;
+        }
+        else if (horizontalMove < -0.2f)
+        {
+            myAnim.SetBool("Walking", true);
+            myRend.flipX = true;
         }
         else
         {
