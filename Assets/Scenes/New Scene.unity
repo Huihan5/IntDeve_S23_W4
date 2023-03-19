@@ -301,16 +301,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 189438763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85886cef7650047a5897074805405098, type: 3}
+  m_Script: {fileID: 11500000, guid: fdc3bf945af434ad9a31d92144e7fe95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xPos: 0
   isAdded: 1
-  speed: 5
-  leftBound: -5
-  rightBound: 27.5
-  xLeftSpeed: 0
-  xRightSpeed: 0
+  speed: 2
+  leftBound: -5.35
+  rightBound: 30.5
 --- !u!1 &218780470
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,9 +387,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218780470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.96, y: 5.5678606, z: 0}
+  m_LocalPosition: {x: 23.377768, y: 5.5678606, z: 0}
   m_LocalScale: {x: 0.70832, y: 0.70832, z: 0.70832}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 20
@@ -405,7 +403,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 218780470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85886cef7650047a5897074805405098, type: 3}
+  m_Script: {fileID: 11500000, guid: fdc3bf945af434ad9a31d92144e7fe95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xPos: 0
@@ -413,8 +411,6 @@ MonoBehaviour:
   speed: 8
   leftBound: -2
   rightBound: 27.5
-  xLeftSpeed: 0
-  xRightSpeed: 0
 --- !u!1 &336223768
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +936,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 835b20be1c8784e35a0f0be781346549, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3697,13 +3693,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133850962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85886cef7650047a5897074805405098, type: 3}
+  m_Script: {fileID: 11500000, guid: fdc3bf945af434ad9a31d92144e7fe95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xPos: 0
   isAdded: 1
-  speed: 2
-  leftBound: -5
-  rightBound: 30.5
-  xLeftSpeed: 0
-  xRightSpeed: 0
+  speed: 5
+  leftBound: -5.5
+  rightBound: 30

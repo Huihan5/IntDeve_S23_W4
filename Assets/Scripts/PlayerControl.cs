@@ -215,6 +215,11 @@ public class PlayerControl : MonoBehaviour
             SceneManager.LoadScene(2);
         }
 
+        if(somecollision.gameObject.name == "obj_door" && score >= 3)
+        {
+            SceneManager.LoadScene(3);
+        }
+
         if (somecollision.gameObject.name == "obj_final" && score >= 3)
         {
             GameWin = true;
