@@ -220,7 +220,7 @@ public class PlayerControl : MonoBehaviour
             SceneManager.LoadScene(3);
         }
 
-        if (somecollision.gameObject.name == "obj_final" && score >= 3)
+        if (somecollision.gameObject.name == "obj_final" && score >= 5)
         {
             GameWin = true;
         }
