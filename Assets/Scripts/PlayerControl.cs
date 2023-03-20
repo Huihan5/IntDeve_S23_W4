@@ -52,6 +52,8 @@ public class PlayerControl : MonoBehaviour
 
     public AudioClip collectItem;
 
+    public AudioClip walking;
+
     //Text
 
     public GameObject Instruction;
@@ -118,6 +120,11 @@ public class PlayerControl : MonoBehaviour
                     SecondJump = true;
                 }
             }
+
+            //if (Input.GetButtonDown("Left") || Input.GetButtonDown("Right"))
+            //{
+            //    mySource.Play();
+            //}
         }
 
         if (Grounded)
