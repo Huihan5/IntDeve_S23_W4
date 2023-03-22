@@ -54,6 +54,8 @@ public class PlayerControl : MonoBehaviour
 
     public AudioClip walking;
 
+    public AudioClip onGround;
+
     //Text
 
     public GameObject Instruction;
@@ -120,16 +122,17 @@ public class PlayerControl : MonoBehaviour
                     SecondJump = true;
                 }
             }
-
-            //if (Input.GetButtonDown("Left") || Input.GetButtonDown("Right"))
-            //{
-            //    mySource.Play();
-            //}
         }
 
         if (Grounded)
         {
             jumpTimes = 1;
+
+            //Nuclear Fusion Detected
+            if (!mySource.isPlaying)
+            {
+                mySource.PlayOneShot(onGround);
+            }
         }
 
         if (jumpTimes < 0)
@@ -141,11 +144,23 @@ public class PlayerControl : MonoBehaviour
         {
             myAnim.SetBool("Walking", true);
             myRend.flipX = false;
+
+            //Nuclear Fusion Detected
+            if (!mySource.isPlaying)
+            {
+                mySource.PlayOneShot(walking);
+            }
         }
         else if (horizontalMove < -0.2f)
         {
             myAnim.SetBool("Walking", true);
             myRend.flipX = true;
+
+            //Nuclear Fusion Detected
+            if (!mySource.isPlaying)
+            {
+                mySource.PlayOneShot(walking);
+            }
         }
         else
         {
