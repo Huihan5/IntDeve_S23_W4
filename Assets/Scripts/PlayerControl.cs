@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 using UnityEngine.SceneManagement;
+using Unity.Burst.CompilerServices;
+using Cinemachine;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -127,12 +129,6 @@ public class PlayerControl : MonoBehaviour
         if (Grounded)
         {
             jumpTimes = 1;
-
-            //Nuclear Fusion Detected
-            if (!mySource.isPlaying)
-            {
-                mySource.PlayOneShot(onGround);
-            }
         }
 
         if (jumpTimes < 0)
@@ -211,18 +207,48 @@ public class PlayerControl : MonoBehaviour
             myBody.gravityScale = gravityFall;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, castDist);
+        //!
+
+        //int layer = LayerMask.NameToLayer("Ground");
+
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, castDist, layer);
+
+        //Debug.DrawRay(transform.position, Vector2.down * castDist, Color.red);
+
+        //if(hit.transform != null)
+        //{
+        //    Debug.Log(hit.transform.name);
+        //}
+
+        //if (hit.collider != null && hit.transform.name == "obj_ground")
+        //{
+        //    Grounded = true;
+        //    Debug.Log("Grounded");
+        //}
+        //else
+        //{
+        //    Grounded = false;
+        //}
+
+        //ReallyWorking
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, castDist);
 
         Debug.DrawRay(transform.position, Vector2.down * castDist, Color.red);
 
-        if(hit.collider != null && hit.transform.name == "obj_ground")
+        for (int i = 0; i < hits.Length; i++)
         {
-            Grounded = true;
-            Debug.Log("Grounded");
-        }
-        else
-        {
-            Grounded = false;
+            RaycastHit2D hit = hits[i];
+
+            if (hit.collider != null && hit.transform.name == "obj_ground")
+            {
+                Grounded = true;
+                Debug.Log("Grounded");
+            }
+            else
+            {
+                Grounded = false;
+            }
         }
 
         myBody.velocity = new Vector3(moveSpeed, myBody.velocity.y, 0);
