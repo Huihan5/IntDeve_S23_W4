@@ -405,10 +405,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -23.04758, y: 11.4}
-      - {x: -22.807644, y: -9.240576}
-      - {x: 23.04758, y: -9.060624}
-      - {x: 23.04758, y: 11.4}
+    - - {x: -24.878462, y: 11.314842}
+      - {x: -24.851418, y: -11.412086}
+      - {x: 25.176517, y: -11.359868}
+      - {x: 25.065777, y: 11.4}
 --- !u!1 &32627005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,6 +3505,7 @@ MonoBehaviour:
   Win: {fileID: 76103980}
   Lose: {fileID: 1600955896}
   sceneNumber: 1
+  rebornNumber: 3
 --- !u!61 &1868329111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3856,7 +3857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983809394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.024799, y: -1.9191254, z: -10}
+  m_LocalPosition: {x: -4.1, y: -1.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

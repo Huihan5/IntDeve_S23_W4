@@ -3086,6 +3086,7 @@ MonoBehaviour:
   Win: {fileID: 707647723}
   Lose: {fileID: 829083446}
   sceneNumber: 1
+  rebornNumber: 2
 --- !u!50 &1103323936
 Rigidbody2D:
   serializedVersion: 4
@@ -3877,10 +3878,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -23.04758, y: 11.4}
-      - {x: -23.04758, y: -11.4}
-      - {x: 23.04758, y: -11.4}
-      - {x: 23.04758, y: 11.4}
+    - - {x: -24.852758, y: 11.451649}
+      - {x: -24.855312, y: -11.45165}
+      - {x: 24.958607, y: -11.34835}
+      - {x: 24.95861, y: 11.400001}
 --- !u!1 &1385199149
 GameObject:
   m_ObjectHideFlags: 0

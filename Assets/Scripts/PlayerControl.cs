@@ -72,6 +72,10 @@ public class PlayerControl : MonoBehaviour
 
     public float sceneNumber = 1;
 
+    //Bettering
+
+    public float rebornNumber = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -174,7 +178,18 @@ public class PlayerControl : MonoBehaviour
 
         if (GameLose && Input.GetButtonDown("Jump") && !GameWin)
         {
-            SceneManager.LoadScene(1);
+            if (rebornNumber == 1)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else if (rebornNumber == 2)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else if (rebornNumber == 3)
+            {
+                SceneManager.LoadScene(3);
+            }
         }
 
     }
